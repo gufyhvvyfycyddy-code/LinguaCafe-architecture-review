@@ -2,24 +2,31 @@
 
 ## Git / publication
 
-- 源码正本：gufyhvvyfycyddy-code/LinguaCafe-local
-- 可见性：Public
-- 2026-09-07 本地核查：local HEAD 28c12d41...
-- 同期 origin/master：1c9bdcd7...
-- 两端是双向分叉，不允许直接推送或强行合并。
-- 工作区仍有多组未提交用户资产。
+- Source-of-truth: gufyhvvyfycyddy-code/LinguaCafe-local
+- Visibility: Public
+- Git history reconciliation completed on 2026-09-07.
+- Current remote master: `89bc5cbabc6d8ff9b345d109e2eb54a4d8ba92d3`.
+- The former local-only commit `28c12d41` and remote commit `70a4a36f` had the same stable patch-id.
+- Isolated merge-tree verification showed the reconciled tree was byte-for-byte identical to the pre-reconciliation remote tree.
+- The push therefore connected Git history without publishing the dirty local worktree.
+- The main local checkout still contains uncommitted user assets and has not been reset, cleaned, stashed, or bulk-published.
+
+## External review baseline
+
+Use source commit:
+`89bc5cbabc6d8ff9b345d109e2eb54a4d8ba92d3`
+
+This is a code-review baseline. It does not prove current Web/Android/iOS release readiness.
 
 ## Public security
 
-2026-09-07 已对三个公开仓启用 GitHub Secret Scanning 与 Push Protection。
-启用后 GitHub API 当前返回 0 个 Secret Scanning alerts，但这不能证明安全：源码仓仍可确认存在不应公开跟踪的环境配置和历史浏览器自动化产物。
+GitHub Secret Scanning and Push Protection are enabled on all three public repositories.
+GitHub currently reports 0 supported-pattern secret-scanning alerts, but the source repository still contains tracked environment configuration and historical browser-automation artifacts that fail the project public-hygiene gate.
 
-结论：源码仓在完成精确敏感信息清理和凭据轮换判断前，状态为 PUBLICATION HYGIENE BLOCKED。
+Status: `PUBLICATION HYGIENE BLOCKED` until that issue is resolved or explicitly accepted.
 
 ## Platform
 
-- Web/PC：实现最完整；当前版本仍需新的真实页面回归。
-- Android：工程存在；历史验收较多；最新 store-ready 状态待验。
-- iOS：工程和发布材料存在；Xcode/签名/设备/TestFlight/App Store 证据未完成。
-
-本仓只做审查和问题管理，不自动授权新的产品代码开发。
+- Web/PC: implementation is the most complete; current-baseline browser acceptance still needed.
+- Android: implementation exists; current release/AAB/signing/Play readiness still needs proof.
+- iOS: implementation/release materials exist; macOS/Xcode/signing/device/TestFlight/App Store evidence remains incomplete.
