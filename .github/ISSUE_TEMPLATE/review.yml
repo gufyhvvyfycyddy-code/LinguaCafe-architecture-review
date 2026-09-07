@@ -1,0 +1,86 @@
+name: Architecture / technical review finding
+description: Record a concrete architecture, code, UX, platform, data or release problem.
+title: "[Review] "
+body:
+  - type: textarea
+    id: phenomenon
+    attributes:
+      label: 现象 / Problem
+      description: What exactly is happening?
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: 对用户的影响 / User impact
+      description: What does this change for a real user, developer or release?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 当前证据 / Evidence
+      description: Commit, file path, test, browser run, log-safe observation, or external requirement. Do not paste secrets.
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 问题类型 / Type
+      options:
+        - Code / architecture
+        - UI / UX
+        - Data / FSRS
+        - Security / privacy
+        - Platform / release
+        - External capability
+        - Mixed
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - Cross-platform
+        - Web / PC
+        - Android
+        - iOS
+        - Server / infrastructure
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: 阻塞级别 / Priority
+      options:
+        - P0 — release/data/security blocker
+        - P1 — main flow/high impact
+        - P2 — important improvement
+        - P3 — optional optimization
+        - External Gate
+        - Research
+    validations:
+      required: true
+  - type: textarea
+    id: direction
+    attributes:
+      label: 解决方向 / Direction
+      description: Smallest plausible direction. Do not prescribe a rewrite without evidence.
+  - type: textarea
+    id: next
+    attributes:
+      label: 下一动作 / Next action
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: 依赖 / Dependencies
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 验收证据 / Acceptance evidence
+      description: What concrete evidence would close this issue?
+    validations:
+      required: true
