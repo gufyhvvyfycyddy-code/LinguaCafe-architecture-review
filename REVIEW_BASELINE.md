@@ -3,31 +3,30 @@
 Source repository:
 https://github.com/gufyhvvyfycyddy-code/LinguaCafe-local
 
-Review commit:
-`89bc5cbabc6d8ff9b345d109e2eb54a4d8ba92d3`
+Current review commit:
+`190e7ab95e9415af23c9799cbc276714dcdd6ed5`
 
-## Why this commit
+## What happened before this baseline
 
-Before reconciliation, local master and origin/master had diverged.
+1. Local and remote Git histories had diverged.
+2. The local-only `28c12d41` and remote `70a4a36f` were verified to have the same stable patch-id.
+3. An isolated merge-tree completed without conflict and produced the same product tree as the pre-reconciliation remote.
+4. A normal non-force push created the reconciliation history.
+5. The source README was updated with the three-repository review entry.
+6. Thirty-five tracked Playwright console/page artifacts and two Python bytecode files were removed.
+7. Generic Python cache ignore rules were added.
 
-Read-only verification found:
-- local-only `28c12d41` and remote `70a4a36f` had identical stable patch-id;
-- they modified the same functional change;
-- an isolated merge-tree completed with no conflict;
-- the resulting Git tree exactly equaled the pre-reconciliation remote tree.
+## What this baseline proves
 
-A normal non-force push then created the reconciliation commit.
-
-## What this commit does prove
-
-- External reviewers now have one remote source-history baseline.
-- No dirty local-worktree files were included in that reconciliation.
-- No product-file content changed as a result of the reconciliation itself.
+- external reviewers have one source SHA;
+- the dirty local checkout was not bulk-published;
+- the historical browser automation artifacts and tokenizer bytecode are absent from the current tree;
+- the source repository links to the architecture and product-launch review repositories.
 
 ## What it does not prove
 
-- public repository hygiene is complete;
+- tracked environment configuration is safe for public distribution;
 - all local uncommitted assets have been classified;
-- Web/PC has been reaccepted on this exact baseline;
+- Web/PC current browser acceptance is complete;
 - Android is Play Store ready;
 - iOS is TestFlight/App Store ready.
