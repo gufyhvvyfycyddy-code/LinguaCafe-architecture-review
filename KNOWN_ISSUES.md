@@ -24,6 +24,12 @@ This page is the short entry point. GitHub Issues remain the executable source o
    - Resolved by source PR #30; see Issue #25.
 5. **Registration password validation synchronization**
    - Resolved by source PR #31; see Issue #26.
+6. **CodeQL tokenizer/IIS findings**
+   - Current default-branch CodeQL has 0 open alerts after source PR #36/#37 and subsequent default-branch analysis; see Issues #28/#29.
+7. **P0 production dependency High triage**
+   - Source PR #33/#39/#40 reduced default-branch Dependabot from 137 alerts to 28 and from 48 High to 6 High.
+   - The remaining High alerts have explicit reachability/upgrade dispositions in `DEPENDENCY_HIGH_RISK_DISPOSITION_2026-09-07.md`.
+   - Architecture Issue #23 acceptance criteria are satisfied.
 
 ## P1 / external gates
 
@@ -31,7 +37,7 @@ This page is the short entry point. GitHub Issues remain the executable source o
 - Re-verify Android release/AAB/signing/Play readiness.
 - Complete iOS macOS/Xcode/signing/device/TestFlight/App Store evidence.
 - Audit mobile sync/offline queue/idempotency invariants.
-- Assess CodeQL/code-scanning value for the actual supported languages in this monorepo.
+- Keep medium/low dependency debt visible and execute the planned Laravel 12 / Vue3 frontend modernization before enabling paths that would invalidate the current High-risk dispositions.
 
 ## Product-quality follow-ups
 
