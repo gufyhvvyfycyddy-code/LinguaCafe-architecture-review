@@ -17,7 +17,7 @@ This is the shortest entry point for an external reviewer.
 
 Use:
 
-bbfd3426e089008fb19e5920850e4b9c4bda5ab8
+6989ed27c933716f9069bb9b14fba92624081fc4
 
 Why this SHA:
 - Git history divergence had already been reconciled without force push.
@@ -25,6 +25,8 @@ Why this SHA:
 - source README and SECURITY policy had been added.
 - GitHub workflow-token permissions were restricted to contents: read.
 - source PR #25 merged the minimal Laravel Reverb Critical fix after A/B dependency/bootstrap validation.
+- source PR #26 made the Web production image reproducible with a root lock file, `npm ci`, Docker build-context hygiene, and native `fsrs-rs-php`.
+- real Chrome verification on the final production Web image completed Reader → lookup → save WordSense → sense ReviewCard → interval preview → rating with HTTP 200 responses and exactly one ReviewLog.
 - the former Dependabot Critical advisory is fixed on this default-branch baseline.
 
 This SHA is the current frozen application-code target for external review. Later source-master commits must be checked before assuming they are documentation-only.
@@ -36,7 +38,7 @@ LinguaCafe is being narrowed into an English reading-first learning product. A u
 ## Platform status
 
 ### Web / PC
-Most complete implementation. Historical acceptance evidence exists, but a live current-baseline browser regression still needs to be recorded before release readiness is claimed.
+Most complete implementation. A live current-baseline Chrome regression is now recorded for login, Home, Library/import, Reader, dictionary lookup, WordSense creation, Vocabulary, sense Review and Settings. Fresh Docker verification also proved the final production Web image loads native `fsrs-rs-php`; interval preview and rating both returned HTTP 200. This does not by itself prove every admin/destructive path or production deployment topology.
 
 ### Android
 Native project exists and historical emulator evidence exists. Current signed release artifact / AAB / Play Console readiness is not yet proven.
@@ -56,23 +58,35 @@ The current public source tree still tracks environment-configuration paths. Sec
 ### Dependency security
 Architecture Issue #23.
 
-Dependabot snapshot after source PR #25:
-- 113 open alerts total;
+Dependabot snapshot after source PR #26:
+- 137 open alerts total;
 - 0 Critical;
-- 44 High;
-- 59 Moderate;
-- 10 Low.
+- 48 High;
+- 73 Medium;
+- 16 Low.
 
 Manifest split:
+- root package-lock.json: 46;
 - composer.lock: 49;
-- root package.json: 22;
 - experimental resources/vue3/package-lock.json: 41;
 - mobile/package-lock.json: 1.
+
+The higher total follows the addition of the root package lock, which makes the previously unlocked root frontend dependency graph visible to Dependabot. Treat this as improved dependency visibility, not as proof that PR #26 introduced 24 new exploitable runtime vulnerabilities.
 
 The former Critical Laravel Reverb advisory is fixed by merged source PR #25:
 https://github.com/gufyhvvyfycyddy-code/LinguaCafe-local/pull/25
 
 The merged fix updates only Reverb v1.0.0 to v1.11.1 and ratchet/rfc6455 v0.3.1 to v0.4.1. Broad PR #24 was rejected because its wider dependency resolution broke Laravel 11.15 package discovery. Remaining advisories require separate reachability and compatibility decisions.
+
+### Python tokenizer clean-build reproducibility
+Architecture Issue #25.
+
+A clean Python tokenizer image build still depends on live spaCy model downloads from GitHub-hosted endpoints. The already-built tokenizer runtime worked during the browser smoke, but a new server/CI/recovery host can still be blocked by external download availability. This must be made reproducible without inventing a silent fallback tokenizer.
+
+### Registration validation UX
+Architecture Issue #26.
+
+Real Chrome QA observed a transient password-mismatch state even though matching passwords produced a successful account. This is not a release-security blocker, but it is a first-run trust/onboarding defect and is tracked separately rather than being folded into PR #26.
 
 ## GitHub security status
 
@@ -131,7 +145,7 @@ These are intentionally not dismissed merely to make the dashboard green. The Ra
 
 - App Store is not completed.
 - Play Store is not completed.
-- 113 remaining Dependabot alerts are not 113 equally exposed production vulnerabilities.
+- 137 remaining Dependabot alerts are not 137 equally exposed production vulnerabilities.
 - GitHub CodeQL success does not mean all findings are fixed.
 - GitHub Stars, Product Hunt votes or download counts do not prove retention.
 - file size alone does not justify refactoring.
@@ -141,4 +155,4 @@ These are intentionally not dismissed merely to make the dashboard green. The Ra
 
 The public external-review package is ready for review.
 
-The product itself is not release-ready yet. Open environment-hygiene, dependency, browser, Android and iOS gates are intentionally visible rather than hidden.
+The product itself is not release-ready yet. Open environment-hygiene, dependency, Python-tokenizer clean-build, Android and iOS gates are intentionally visible rather than hidden. The Web/PC current-baseline Reader → WordSense → sense Review path is no longer an open browser-evidence gate.

@@ -4,6 +4,7 @@ LinguaCafe 的公开架构、技术债、UI/UX、测试与三端成熟度审查�
 
 源码正本：
 - https://github.com/gufyhvvyfycyddy-code/LinguaCafe-local
+- 当前冻结审查基线：`6989ed27c933716f9069bb9b14fba92624081fc4`
 
 产品上线与运营审查：
 - https://github.com/gufyhvvyfycyddy-code/LinguaCafe-product-launch
@@ -33,4 +34,5 @@ LinguaCafe 的公开架构、技术债、UI/UX、测试与三端成熟度审查�
 - Reader / Sense Review / FSRS / ReviewLog / Sync / Offline 的 owner 是否清楚？
 - 三端共享 API 和领域模型是否适合继续扩展？
 - 当前安全、隐私、备份和发布工程是否足以支持真实用户？
+- Web/PC 当前已完成的真实浏览器链路与仍未验证的后台/破坏性路径之间，边界是否足够清楚？
 - 哪些历史兼容路径应该保留，哪些可以退休？
