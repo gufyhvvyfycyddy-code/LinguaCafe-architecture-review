@@ -3,30 +3,45 @@
 Source repository:
 https://github.com/gufyhvvyfycyddy-code/LinguaCafe-local
 
-Current review commit:
-`190e7ab95e9415af23c9799cbc276714dcdd6ed5`
+Frozen application-code review commit:
 
-## What happened before this baseline
+`bd95b6a8308de8e9663fab344c3ffccefa71e9d3`
 
-1. Local and remote Git histories had diverged.
-2. The local-only `28c12d41` and remote `70a4a36f` were verified to have the same stable patch-id.
-3. An isolated merge-tree completed without conflict and produced the same product tree as the pre-reconciliation remote.
-4. A normal non-force push created the reconciliation history.
-5. The source README was updated with the three-repository review entry.
-6. Thirty-five tracked Playwright console/page artifacts and two Python bytecode files were removed.
-7. Generic Python cache ignore rules were added.
+## Why this baseline
+
+Before this SHA:
+
+1. local and remote Git histories were reconciled without force push;
+2. the duplicate-equivalent local/remote fix was verified by stable patch-id;
+3. tracked Playwright console/page artifacts were removed;
+4. tracked tokenizer Python bytecode was removed;
+5. generic Python cache ignore rules were added;
+6. the source repository gained the three-repository review entry and security reporting policy;
+7. GitHub workflow-token permissions were restricted to `contents: read`;
+8. the follow-up master CodeQL run completed successfully.
 
 ## What this baseline proves
 
-- external reviewers have one source SHA;
+- reviewers have one stable application-code SHA;
 - the dirty local checkout was not bulk-published;
-- the historical browser automation artifacts and tokenizer bytecode are absent from the current tree;
-- the source repository links to the architecture and product-launch review repositories.
+- known generated browser/Python artifacts are absent from the current tree;
+- source, architecture review and product-launch repositories are linked;
+- workflow-token hardening is present.
 
 ## What it does not prove
 
 - tracked environment configuration is safe for public distribution;
+- dependency vulnerabilities are resolved;
 - all local uncommitted assets have been classified;
-- Web/PC current browser acceptance is complete;
+- Web/PC current real-browser acceptance is complete;
 - Android is Play Store ready;
-- iOS is TestFlight/App Store ready.
+- iOS is TestFlight/App Store ready;
+- Swift CodeQL coverage is currently complete.
+
+## Security candidate branch
+
+Laravel Reverb Critical remediation is under review in source PR #24:
+
+https://github.com/gufyhvvyfycyddy-code/LinguaCafe-local/pull/24
+
+Do not treat that PR as merged baseline until application-level regression evidence exists.
