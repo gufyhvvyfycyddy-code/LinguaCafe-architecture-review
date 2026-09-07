@@ -31,7 +31,7 @@ Why this SHA:
 
 This SHA is the current frozen application-code target for external review. Later source-master commits must be checked before assuming they are documentation-only.
 
-Current source `master` also contains post-baseline fixes: source PR #30 made the Python tokenizer image reproducible, PR #31 fixed registration password-confirmation validation synchronization, PR #32 updated the targeted axios + moment browser runtime dependencies, and PR #34 added publication-state documentation. Publication status is synchronized through source merge commit `abba49dd9723170d861839b478dad9224505ea8c`; these later commits do not automatically inherit the frozen baseline's browser-acceptance scope.
+Current source `master` also contains post-baseline fixes through source merge commit `2abc82df754525c19733382200aaf72a930d436a`: PR #30 tokenizer image reproducibility, PR #31 registration validation, PR #32 targeted browser-runtime dependencies, PR #33 compatible PHP security refresh, PR #34/#35 publication synchronization, PR #36/#37 tokenizer/IIS CodeQL remediation, PR #39 unused Vue3 experiment removal, and PR #40 BrowserSync 3 development-tool update. These later commits do not automatically inherit the frozen baseline's browser-acceptance scope.
 
 ## Product in one paragraph
 
@@ -58,34 +58,34 @@ Architecture Issue #1.
 The current public source tree still tracks environment-configuration paths. Secret values are intentionally not reproduced in review documents. Current project rules do not authorize reading or modifying .env files, so this remains explicitly unresolved.
 
 ### Dependency security
-Architecture Issue #23.
+Architecture Issue #23 acceptance is satisfied.
 
-Dependabot snapshot after source PR #26:
-- 137 open alerts total;
+Current Dependabot snapshot after source PR #40:
+- 28 open alerts total;
 - 0 Critical;
-- 48 High;
-- 73 Medium;
-- 16 Low.
+- 6 High;
+- 18 Medium;
+- 4 Low.
 
 Manifest split:
-- root package-lock.json: 46;
-- composer.lock: 49;
-- experimental resources/vue3/package-lock.json: 41;
-- mobile/package-lock.json: 1.
+- root `package-lock.json`: 24;
+- `composer.lock`: 2;
+- `docker/python/requirements.lock.txt`: 1;
+- `mobile/package-lock.json`: 1;
+- the experimental `resources/vue3/package-lock.json` was removed by PR #39.
 
-The higher total follows the addition of the root package lock, which makes the previously unlocked root frontend dependency graph visible to Dependabot. Treat this as improved dependency visibility, not as proof that PR #26 introduced 24 new exploitable runtime vulnerabilities.
+Source PR #33 removed the compatible PHP advisories while preserving Laravel 11 behavior (Unit 745/745; Feature 2882/2882). PR #40 removed the old BrowserSync/localtunnel axios chain. The six remaining High alerts each have an explicit current non-reachability, accepted development-tool risk, or upgrade gate in `DEPENDENCY_HIGH_RISK_DISPOSITION_2026-09-07.md`.
 
-The former Critical Laravel Reverb advisory is fixed by merged source PR #25:
-https://github.com/gufyhvvyfycyddy-code/LinguaCafe-local/pull/25
-
-The merged fix updates only Reverb v1.0.0 to v1.11.1 and ratchet/rfc6455 v0.3.1 to v0.4.1. Broad PR #24 was rejected because its wider dependency resolution broke Laravel 11.15 package discovery. Remaining advisories require separate reachability and compatibility decisions.
+Medium/Low dependency debt remains visible follow-up work. Laravel 12 and Vue3/Vuetify3 are planned platform migrations rather than hidden security-patch scope.
 
 ## Recently resolved post-baseline source fixes
 
 - Architecture Issue #25 is resolved by source PR #30: the Python tokenizer image now uses a reproducible, pinned model-artifact path instead of depending on an unpinned live download during every clean build.
 - Architecture Issue #26 is resolved by source PR #31: registration password-confirmation validation is synchronized in the client and was re-verified in real Chrome.
-- Source PR #32 made targeted axios + moment runtime dependency updates. The remaining 137 Dependabot alerts still require separate production-reachability and compatibility triage.
-- Source PR #34 added the publication-state documentation used to distinguish the frozen functional baseline from the newer default branch.
+- Source PR #32 made targeted axios + moment runtime dependency updates.
+- Source PR #34/#35 added and synchronized publication-state documentation.
+- Source PR #33 completed the compatible PHP security refresh; PR #39 removed the unreferenced Vue3 prototype; PR #40 removed the old BrowserSync/localtunnel axios chain.
+- Dependency High dispositions are recorded in `DEPENDENCY_HIGH_RISK_DISPOSITION_2026-09-07.md`.
 
 ## GitHub security status
 
@@ -97,16 +97,7 @@ Enabled:
 - Private Vulnerability Reporting;
 - CodeQL default setup.
 
-The three CodeQL workflow-token findings were fixed on master.
-
-Eight CodeQL findings remain on the current default branch:
-- IIS public/web.config: missing X-Frame-Options;
-- bundled third-party public/js/dmak/raphael.js: double escaping;
-- three test-only SenseReview regex/sanitization findings;
-- tools/tokenizer.py: two reflective-XSS findings;
-- tools/tokenizer.py: one exception-detail exposure finding.
-
-These are intentionally not dismissed merely to make the dashboard green. The Raphaël asset is still loaded by the user layout; production Docker networking keeps the tokenizer service internal, but its endpoint findings still need call-path review.
+The workflow-token findings are fixed and current default-branch CodeQL has **0 open alerts**. Tokenizer boundary work is closed through source PR #36 / architecture Issue #28; IIS anti-clickjacking work is closed through source PR #37 / Issue #29; the legacy Raphaël finding is also fixed in the current default-branch scan.
 
 ## Architecture questions worth reviewing first
 
@@ -144,14 +135,14 @@ These are intentionally not dismissed merely to make the dashboard green. The Ra
 
 - App Store is not completed.
 - Play Store is not completed.
-- 137 remaining Dependabot alerts are not 137 equally exposed production vulnerabilities.
-- GitHub CodeQL success does not mean all findings are fixed.
+- The 28 remaining Dependabot alerts are not equally exposed production vulnerabilities; the six High alerts have explicit dispositions and medium/low debt remains visible.
+- Current default-branch CodeQL has zero open alerts, but this does not replace runtime/platform security testing.
 - GitHub Stars, Product Hunt votes or download counts do not prove retention.
 - file size alone does not justify refactoring.
-- the experimental Vue3 directory is not the current Vue2 production frontend.
+- the former experimental Vue3 directory was not part of the Vue2 production frontend and was removed by source PR #39.
 
 ## Current decision state
 
 The public external-review package is ready for review.
 
-The product itself is not release-ready yet. Open environment-hygiene, remaining dependency/security triage, Android and iOS release gates, mobile sync/offline verification, production operations, and real-user validation remain intentionally visible. The Python tokenizer clean-build and registration-validation items are resolved post-baseline, and the Web/PC current-baseline Reader → WordSense → sense Review path is no longer an open browser-evidence gate.
+The product itself is not release-ready yet. Public environment hygiene, Android and iOS release gates, mobile sync/offline verification, production operations, privacy/support and real-user validation remain intentionally visible. The dependency P0 and current CodeQL findings have been reduced to evidence-backed dispositions/zero-open status; medium/low dependency debt and Laravel12/Vue3 modernization remain follow-up work.

@@ -17,9 +17,10 @@ LinguaCafe 让用户在真实英语材料中学习“这个词在这里是什么
 1. 源码仓公开安全门禁仍有 P0：当前公开源码树仍跟踪环境配置路径。精确敏感内容不在本仓公开复述，也未在本轮读取。
 2. 早期本地/远端双向分叉已经通过非 force 方式完成历史收敛；当前远端源码 `master` 不再以该分叉作为阻塞项。
 3. 历史 Playwright CLI 产物和 tokenizer Python bytecode 已从当前源码 `master` 清理。受保护的本地主工作区仍有未提交用户资产，因此仍不能整体 reset、clean 或 bulk push。
-4. 冻结功能验收基线仍是 `6989ed27c933716f9069bb9b14fba92624081fc4`；当前源码 `master` 还包含之后的 PR #30/#31/#32/#34 修复与发布文档，这些后续提交需要按各自证据理解。
-5. iOS 代码和发布材料存在，但缺 macOS/Xcode/签名/设备/TestFlight/App Store 的最终真实证据。
-6. Android 有工程和历史模拟器证据，但最新 release/AAB/签名/Play Store 状态需要重新验证。
+4. 冻结功能验收基线仍是 `6989ed27c933716f9069bb9b14fba92624081fc4`；当前源码 `master` 已继续完成 tokenizer/IIS CodeQL、PHP 依赖、无引用 Vue3 实验目录和 BrowserSync 开发链修复，当前审查状态同步到 `2abc82df754525c19733382200aaf72a930d436a`。后续源码事实与冻结浏览器验收范围分开理解。
+5. 当前默认分支 CodeQL 为 0 open；Dependabot 为 28 open（0 Critical / 6 High / 18 Medium / 4 Low）。6 个 High 的逐项处置见 `DEPENDENCY_HIGH_RISK_DISPOSITION_2026-09-07.md`。
+6. iOS 代码和发布材料存在，但缺 macOS/Xcode/签名/设备/TestFlight/App Store 的最终真实证据。
+7. Android 有工程和历史模拟器证据，但最新 release/AAB/签名/Play Store 状态需要重新验证。
 
 ## 建议审查顺序
 

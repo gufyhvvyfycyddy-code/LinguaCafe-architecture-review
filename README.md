@@ -5,7 +5,7 @@ LinguaCafe 的公开架构、技术债、UI/UX、测试与三端成熟度审查�
 源码正本：
 - https://github.com/gufyhvvyfycyddy-code/LinguaCafe-local
 - 当前冻结审查基线：`6989ed27c933716f9069bb9b14fba92624081fc4`
-- 当前源码 `master` 还包含冻结基线之后的修复与发布文档，已同步至源码合并提交 `abba49dd9723170d861839b478dad9224505ea8c`；这些后续提交不自动继承冻结基线的浏览器验收结论。
+- 当前源码 `master` 还包含冻结基线之后的安全、依赖与发布修复，当前审查状态同步至源码合并提交 `2abc82df754525c19733382200aaf72a930d436a`；这些后续提交不自动继承冻结基线的浏览器验收结论。
 
 产品上线与运营审查：
 - https://github.com/gufyhvvyfycyddy-code/LinguaCafe-product-launch
@@ -15,7 +15,8 @@ LinguaCafe 的公开架构、技术债、UI/UX、测试与三端成熟度审查�
 1. [FINAL_REVIEW_HANDOFF.md](FINAL_REVIEW_HANDOFF.md) — 外部审查总入口
 2. [REVIEW_START_HERE.md](REVIEW_START_HERE.md)
 3. [CURRENT_STATUS.md](CURRENT_STATUS.md)
-3. [docs/PLATFORM_STATUS.md](docs/PLATFORM_STATUS.md)
+4. [DEPENDENCY_HIGH_RISK_DISPOSITION_2026-09-07.md](DEPENDENCY_HIGH_RISK_DISPOSITION_2026-09-07.md) — 当前剩余 High 的可达性与升级边界
+5. [docs/PLATFORM_STATUS.md](docs/PLATFORM_STATUS.md)
 4. [docs/ARCHITECTURE_REVIEW.md](docs/ARCHITECTURE_REVIEW.md)
 5. [docs/PUBLIC_SECURITY_FINDINGS.md](docs/PUBLIC_SECURITY_FINDINGS.md)
 6. [docs/COMMUNITY_RESEARCH.md](docs/COMMUNITY_RESEARCH.md)
