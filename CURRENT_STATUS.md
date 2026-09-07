@@ -2,13 +2,13 @@
 
 ## Source / review baseline
 
-- Source repository: `gufyhvvyfycyddy-code/LinguaCafe-local`
+- Source repository: gufyhvvyfycyddy-code/LinguaCafe-local
 - Visibility: Public
-- Frozen application-code review baseline: `bd95b6a8308de8e9663fab344c3ffccefa71e9d3`
-- The earlier local/remote divergence has been reconciled.
-- Tracked Playwright browser artifacts and tokenizer Python bytecode were removed before this baseline.
-- GitHub workflow token permissions were restricted to `contents: read` at this baseline.
-- Later source-master commits may contain review documentation only.
+- Frozen application-code review baseline: bbfd3426e089008fb19e5920850e4b9c4bda5ab8
+- Earlier local/remote divergence has been reconciled without force push.
+- Tracked Playwright browser artifacts and tokenizer Python bytecode were removed.
+- GitHub workflow token permissions are explicitly restricted to contents: read.
+- The baseline includes the merged minimal Laravel Reverb Critical remediation from source PR #25.
 - The main local checkout still contains uncommitted user assets and has not been reset, cleaned, stashed, or bulk-published.
 
 ## Public security
@@ -25,53 +25,57 @@ Enabled on the public source repository:
 
 Tracked environment-configuration paths remain in the public source tree.
 
-Current project rules did not authorize reading or modifying `.env` files. Secret values have not been copied into review documents.
+Current project rules do not authorize reading or modifying .env files. Secret values have not been copied into review documents.
 
 Owner: architecture Issue #1.
 
-### P0 — dependency security
+### Dependency security
 
-Dependabot snapshot:
-- total open alerts: 115;
-- Critical: 1;
-- High: 45;
+Current default-branch Dependabot snapshot after source PR #25:
+- total open alerts: 113;
+- Critical: 0;
+- High: 44;
 - Moderate: 59;
 - Low: 10.
 
 Manifest split:
-- `composer.lock`: 51;
-- root `package.json`: 22;
-- experimental `resources/vue3/package-lock.json`: 41;
-- `mobile/package-lock.json`: 1.
+- composer.lock: 49;
+- root package.json: 22;
+- experimental resources/vue3/package-lock.json: 41;
+- mobile/package-lock.json: 1.
 
-The Critical affects the currently configured Laravel Reverb v1.0.0.
+The former Critical Laravel Reverb advisory is fixed on default branch by source PR #25:
+https://github.com/gufyhvvyfycyddy-code/LinguaCafe-local/pull/25
 
-Scoped remediation candidate:
-https://github.com/gufyhvvyfycyddy-code/LinguaCafe-local/pull/24
+The merged fix is intentionally minimal: Reverb v1.0.0 to v1.11.1 and ratchet/rfc6455 v0.3.1 to v0.4.1. Broad PR #24 was rejected because its Symfony 7.4 resolution broke Laravel 11.15 package discovery in A/B validation.
 
-PR #24 updates Reverb to v1.11.1 and related transitive dependencies. CodeQL checks pass, Composer PHP 8.2 dry-run passes with Windows-only pcntl/posix extension requirements ignored, and the new lock has no Critical Composer advisory. It is intentionally not auto-merged without application-level Linux regression evidence.
+The remaining 113 alerts require production-reachability and compatibility triage. They must not be bulk-upgraded as one dependency migration.
 
 Owner: architecture Issue #23.
 
 ## CodeQL
 
-The follow-up master scan after workflow-permission hardening completed successfully.
+The workflow-permission findings are fixed.
 
-The three Actions missing-permissions findings were resolved.
-
-Eight findings remain:
-- `public/web.config`: missing X-Frame-Options — High;
-- `public/js/dmak/raphael.js`: double escaping — High;
+Eight findings remain on the current default branch:
+- public/web.config: missing X-Frame-Options — High;
+- public/js/dmak/raphael.js: double escaping — High;
 - three SenseReview test-only regex/sanitization findings — High;
-- `tools/tokenizer.py`: two reflective-XSS findings — High;
-- `tools/tokenizer.py`: exception-detail exposure — Medium.
+- tools/tokenizer.py: two reflective-XSS findings — High;
+- tools/tokenizer.py: exception-detail exposure — Medium.
 
-These have not been dismissed merely to make the dashboard green.
+The Raphaël file is still loaded by the current user layout through legacy DMAK assets, so it is not dismissed as dead code. The tokenizer service is internal-only in production Docker networking, but its findings still require endpoint/call-path review before dismissal.
 
-Swift coverage is currently absent. The first Swift autobuild failed because fresh checkout lacked Capacitor packages under `mobile/node_modules`. Tracked in Issue #24.
+Swift CodeQL coverage is currently absent. The first Swift autobuild failed because a fresh checkout did not have required Capacitor packages under mobile/node_modules. Tracked in Issue #24.
+
+Owner: architecture Issue #19 and Issue #24.
 
 ## Platform
 
-- Web/PC: implementation is the most complete; current-baseline real browser acceptance remains open.
+- Web/PC: implementation is the most complete; current-baseline real browser acceptance remains open until a live browser run is recorded.
 - Android: native implementation exists; signed release/AAB/current Play readiness remains open.
 - iOS: Xcode project and release materials exist; macOS/Xcode/signing/device/TestFlight/App Store evidence remains open.
+
+## Review package
+
+The three public repositories are ready to inspect. Release readiness is not claimed while the open environment-hygiene, dependency, browser, Android and iOS gates remain visible.
