@@ -2,28 +2,24 @@
 
 ## Git / publication
 
-- Source-of-truth: gufyhvvyfycyddy-code/LinguaCafe-local
+- Source repository: `gufyhvvyfycyddy-code/LinguaCafe-local`
 - Visibility: Public
-- Git history reconciliation completed on 2026-09-07.
-- Current remote master: `89bc5cbabc6d8ff9b345d109e2eb54a4d8ba92d3`.
-- The former local-only commit `28c12d41` and remote commit `70a4a36f` had the same stable patch-id.
-- Isolated merge-tree verification showed the reconciled tree was byte-for-byte identical to the pre-reconciliation remote tree.
-- The push therefore connected Git history without publishing the dirty local worktree.
+- Current external-review baseline: `190e7ab95e9415af23c9799cbc276714dcdd6ed5`
+- The earlier local/remote divergence has been reconciled.
+- The reconciliation itself changed Git history only; the later publication-hygiene commit removed tracked browser automation artifacts and Python bytecode, plus added generic Python cache ignore rules.
 - The main local checkout still contains uncommitted user assets and has not been reset, cleaned, stashed, or bulk-published.
-
-## External review baseline
-
-Use source commit:
-`89bc5cbabc6d8ff9b345d109e2eb54a4d8ba92d3`
-
-This is a code-review baseline. It does not prove current Web/Android/iOS release readiness.
 
 ## Public security
 
 GitHub Secret Scanning and Push Protection are enabled on all three public repositories.
-GitHub currently reports 0 supported-pattern secret-scanning alerts, but the source repository still contains tracked environment configuration and historical browser-automation artifacts that fail the project public-hygiene gate.
 
-Status: `PUBLICATION HYGIENE BLOCKED` until that issue is resolved or explicitly accepted.
+The source repository no longer tracks the historical `.playwright-cli` artifacts or tokenizer `__pycache__` files on the current baseline.
+
+Remaining P0:
+- tracked environment configuration paths are still present in the public source tree;
+- current project rules prohibit this task from reading or modifying `.env` files, so that part is deliberately left unresolved and must be handled through a separately authorized credential-safe cleanup.
+
+Status: `PARTIAL — P0 ENV HYGIENE BLOCKED`.
 
 ## Platform
 
