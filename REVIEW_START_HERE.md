@@ -14,11 +14,12 @@ LinguaCafe 让用户在真实英语材料中学习“这个词在这里是什么
 
 ## 当前最先审查的事实
 
-1. 源码仓公开安全门禁当前失败：存在被 Git 跟踪的环境配置和历史浏览器自动化产物。精确敏感内容不在本仓公开复述。
-2. 2026-09-07 只读核查时，本地 master 与 origin/master 双向分叉。
-3. 本地工作区还有未提交代码、测试和文档，所以不能整体 push。
-4. iOS 代码和发布材料存在，但缺 macOS/Xcode/签名/设备/TestFlight/App Store 的最终真实证据。
-5. Android 有工程和历史模拟器证据，但最新 release/AAB/签名/Play Store 状态需要重新验证。
+1. 源码仓公开安全门禁仍有 P0：当前公开源码树仍跟踪环境配置路径。精确敏感内容不在本仓公开复述，也未在本轮读取。
+2. 早期本地/远端双向分叉已经通过非 force 方式完成历史收敛；当前远端源码 `master` 不再以该分叉作为阻塞项。
+3. 历史 Playwright CLI 产物和 tokenizer Python bytecode 已从当前源码 `master` 清理。受保护的本地主工作区仍有未提交用户资产，因此仍不能整体 reset、clean 或 bulk push。
+4. 冻结功能验收基线仍是 `6989ed27c933716f9069bb9b14fba92624081fc4`；当前源码 `master` 还包含之后的 PR #30/#31/#32/#34 修复与发布文档，这些后续提交需要按各自证据理解。
+5. iOS 代码和发布材料存在，但缺 macOS/Xcode/签名/设备/TestFlight/App Store 的最终真实证据。
+6. Android 有工程和历史模拟器证据，但最新 release/AAB/签名/Play Store 状态需要重新验证。
 
 ## 建议审查顺序
 

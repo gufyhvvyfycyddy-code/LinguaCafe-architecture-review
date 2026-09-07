@@ -31,6 +31,8 @@ Why this SHA:
 
 This SHA is the current frozen application-code target for external review. Later source-master commits must be checked before assuming they are documentation-only.
 
+Current source `master` also contains post-baseline fixes: source PR #30 made the Python tokenizer image reproducible, PR #31 fixed registration password-confirmation validation synchronization, PR #32 updated the targeted axios + moment browser runtime dependencies, and PR #34 added publication-state documentation. Publication status is synchronized through source merge commit `abba49dd9723170d861839b478dad9224505ea8c`; these later commits do not automatically inherit the frozen baseline's browser-acceptance scope.
+
 ## Product in one paragraph
 
 LinguaCafe is being narrowed into an English reading-first learning product. A user reads real material, resolves the concrete meaning used in that sentence, keeps the source occurrence as evidence, and lets a sense-level ReviewCard use FSRS when natural reading does not provide enough repetition. ReviewLog records real ratings. AI is used mainly for explanation, translation, candidate generation and disambiguation; it should not fabricate formal review history.
@@ -78,15 +80,12 @@ https://github.com/gufyhvvyfycyddy-code/LinguaCafe-local/pull/25
 
 The merged fix updates only Reverb v1.0.0 to v1.11.1 and ratchet/rfc6455 v0.3.1 to v0.4.1. Broad PR #24 was rejected because its wider dependency resolution broke Laravel 11.15 package discovery. Remaining advisories require separate reachability and compatibility decisions.
 
-### Python tokenizer clean-build reproducibility
-Architecture Issue #25.
+## Recently resolved post-baseline source fixes
 
-A clean Python tokenizer image build still depends on live spaCy model downloads from GitHub-hosted endpoints. The already-built tokenizer runtime worked during the browser smoke, but a new server/CI/recovery host can still be blocked by external download availability. This must be made reproducible without inventing a silent fallback tokenizer.
-
-### Registration validation UX
-Architecture Issue #26.
-
-Real Chrome QA observed a transient password-mismatch state even though matching passwords produced a successful account. This is not a release-security blocker, but it is a first-run trust/onboarding defect and is tracked separately rather than being folded into PR #26.
+- Architecture Issue #25 is resolved by source PR #30: the Python tokenizer image now uses a reproducible, pinned model-artifact path instead of depending on an unpinned live download during every clean build.
+- Architecture Issue #26 is resolved by source PR #31: registration password-confirmation validation is synchronized in the client and was re-verified in real Chrome.
+- Source PR #32 made targeted axios + moment runtime dependency updates. The remaining 137 Dependabot alerts still require separate production-reachability and compatibility triage.
+- Source PR #34 added the publication-state documentation used to distinguish the frozen functional baseline from the newer default branch.
 
 ## GitHub security status
 
@@ -155,4 +154,4 @@ These are intentionally not dismissed merely to make the dashboard green. The Ra
 
 The public external-review package is ready for review.
 
-The product itself is not release-ready yet. Open environment-hygiene, dependency, Python-tokenizer clean-build, Android and iOS gates are intentionally visible rather than hidden. The Web/PC current-baseline Reader → WordSense → sense Review path is no longer an open browser-evidence gate.
+The product itself is not release-ready yet. Open environment-hygiene, remaining dependency/security triage, Android and iOS release gates, mobile sync/offline verification, production operations, and real-user validation remain intentionally visible. The Python tokenizer clean-build and registration-validation items are resolved post-baseline, and the Web/PC current-baseline Reader → WordSense → sense Review path is no longer an open browser-evidence gate.

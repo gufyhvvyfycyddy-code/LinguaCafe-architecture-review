@@ -9,6 +9,8 @@
 - Tracked Playwright browser artifacts and tokenizer Python bytecode were removed.
 - GitHub workflow token permissions are explicitly restricted to contents: read.
 - The baseline includes the merged minimal Laravel Reverb Critical remediation from source PR #25 and the reproducible Web/native-FSRS production-image remediation from source PR #26.
+- Post-baseline current-source fixes include source PR #30 (reproducible Python tokenizer image), PR #31 (registration password-confirmation validation synchronization), PR #32 (targeted axios + moment runtime dependency updates), and PR #34 (publication-state documentation). The current source publication sync is represented by merge commit `abba49dd9723170d861839b478dad9224505ea8c`.
+- Architecture Issues #25 and #26 are resolved by source PR #30 and PR #31 respectively.
 - The main local checkout still contains uncommitted user assets and has not been reset, cleaned, stashed, or bulk-published.
 
 ## Public security
@@ -80,4 +82,6 @@ Owner: architecture Issue #19 and Issue #24.
 
 ## Review package
 
-The three public repositories are ready to inspect. Release readiness is not claimed while the open environment-hygiene, dependency, Python-tokenizer clean-build, Android and iOS gates remain visible. Registration validation UX is separately tracked as Issue #26.
+The three public repositories are ready to inspect. Release readiness is not claimed while environment hygiene, remaining dependency/security triage, Android signed release/AAB/Play evidence, iOS bootstrap/signing/TestFlight/App Store evidence, mobile sync/offline verification, and real-user deployment gates remain open.
+
+Recently resolved post-baseline source items: tokenizer clean-build reproducibility (Issue #25 / source PR #30) and registration password-validation synchronization (Issue #26 / source PR #31).

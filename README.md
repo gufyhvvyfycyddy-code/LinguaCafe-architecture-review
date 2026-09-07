@@ -5,6 +5,7 @@ LinguaCafe 的公开架构、技术债、UI/UX、测试与三端成熟度审查�
 源码正本：
 - https://github.com/gufyhvvyfycyddy-code/LinguaCafe-local
 - 当前冻结审查基线：`6989ed27c933716f9069bb9b14fba92624081fc4`
+- 当前源码 `master` 还包含冻结基线之后的修复与发布文档，已同步至源码合并提交 `abba49dd9723170d861839b478dad9224505ea8c`；这些后续提交不自动继承冻结基线的浏览器验收结论。
 
 产品上线与运营审查：
 - https://github.com/gufyhvvyfycyddy-code/LinguaCafe-product-launch
